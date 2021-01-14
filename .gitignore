@@ -1,5 +1,8 @@
 # Generated or downloadable files
 data/generated/*.csv
+data/info
+data/*.xml
+data/*.ini
 
 # Byte-compiled / optimized / DLL files
 __pycache__/
