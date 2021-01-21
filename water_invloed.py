@@ -17,10 +17,11 @@ save_location = r"C:\Users\david\Documenten\Jaar 2\B\BS\AI-2020-BS-GP\data"
 arcpy.env.overwriteOutput = True
 arcpy.CheckOutExtension('Spatial')
 x = 'Ondiep'
+mm = 50 # mm in water that has been simulated.
 
 # Na bui intersect met panden table generator
 # Process: Select all buildings which overlap with their buffer and the highest level of Water on the streets
-outZonalStatstable = ZonalStatisticsAsTable(os.path.join(work_location, r"Buurten\{}\tijdelijk\pandPolygon_Buffer.shp").format(x), "FID", os.path.join(work_location, r"Buurten\{}\resultaten\WS_na_bui.tif").format(x),"WaterInHouses","DATA","MAXIMUM")
+outZonalStatstable = ZonalStatisticsAsTable(os.path.join(work_location, r"Buurten\{}\tijdelijk\pandPolygon_Buffer.shp").format(x), "FID", os.path.join(work_location, r"Buurten\{}\resultaten\WOS_na_bui.tif").format(x),"WaterInHouses","DATA","MAXIMUM")
 
 
-arcpy.TableToTable_conversion(outZonalStatstable, save_location, "waterInHuizen_Test.csv", '')
+arcpy.TableToTable_conversion(outZonalStatstable, save_location, "waterInHuizen_{}.csv".format(mm), '')
