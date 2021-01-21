@@ -25,7 +25,6 @@ relpath = os.path.dirname(sys.argv[0])
 arcpy.env.workspace = r"F:\Documents\Hydrologic_Package_2020-12-09\Afstroomanalyse"
 work_location = r"F:\Documents\Hydrologic_Package_2020-12-09"
 save_location = r"C:\Users\david\Documenten\Jaar 2\B\BS\AI-2020-BS-GP\data"
-# save_location = r"C:\Users\david\Documenten\Jaar 2\B\BS\AI-2020-BS-GP\data\generated\combined_affected_houses.csv"
 
 
 arcpy.env.overwriteOutput = True
@@ -60,10 +59,9 @@ path = work_location+r"\Afstroomanalyse\Buurten\{}\tijdelijk\pandPolygon_clip.sh
 print(path)
 shapeFile = arcpy.mapping.Layer(path)
 arcpy.mapping.AddLayer(df, shapeFile,"BOTTOM")
-# pandPoly = arcpy.MakeTableView_management(in_table=work_location+r"\Afstroomanalyse\Buurten\{}\tijdelijk\pandPolygon_clip.shp".format(x), out_view='pandPolygon_clip')
 joined = arcpy.AddJoin_management("pandPolygon_clip", "FID", affectedHouses, "FID")
 lyr = arcpy.mapping.ListLayers(mxd, "pandPolygon_clip", df)[0]
-source = arcpy.mapping.Layer(r"F:\Documents\Hydrologic_Package_2020-12-09\symbolTest.lyr")
+source = arcpy.mapping.Layer(save_location+r"\symbology.lyr")
 arcpy.mapping.UpdateLayer(df, lyr, source)
 
 df.extent = lyr.getExtent()
